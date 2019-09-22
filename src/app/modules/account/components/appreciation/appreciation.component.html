@@ -1,0 +1,75 @@
+<div class="form-appretiation  sticky">
+  <mat-accordion class="w-50" color="primary">
+    <mat-expansion-panel #addAppreciation>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Reconoce y valora el trabajo de tus compañeros
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <form [formGroup]="appreciationForm" (ngSubmit)="sendAppresiation()">
+        <mat-form-field class="w-100 my-1">
+          <input type="text" formControlName="name" placeholder="¿A quien quieres reconocer?" aria-label="Number"
+            matInput [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let user of filteredOptions | async" [value]="user">
+              <span>{{user.first_name}} {{user.last_name}}</span> |
+              <small>{{user.area}} {{user.team}}</small>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="appreciationForm.get('name').hasError('required') && appreciationForm.get('name').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 my-1">
+          <mat-chip-list #chipList aria-label="reconocimiento" formControlName="skills">
+            <mat-chip *ngFor="let fruit of skils" selected class="bg-green" [removable]="removable"
+              (removed)="remove(fruit)">
+              {{fruit.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="¿Que quieres reconocer?" [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+
+          </mat-chip-list>
+          <mat-error
+            *ngIf="appreciationForm.get('skills').hasError('required') && appreciationForm.get('skills').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <label for="">Selecciona una imagen que represente reconocimiento</label>
+        <div class="my-4" role="button">
+          <img class="m-2" [ngClass]="{'selected': imgSelect === img}" *ngFor="let img of routeImg "
+            [src]="'assets/appreciation/'+img" width="120" (click)="setImg(img)">
+        </div>
+
+        <mat-form-field class="example-full-width w-100">
+          <textarea matInput placeholder="Deja un comentario" formControlName="comment"></textarea>
+          <mat-error
+            *ngIf="appreciationForm.get('comment').hasError('required') && appreciationForm.get('comment').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <mat-slide-toggle class="w-100" formControlName="anonimus">¿Quieres firmar con tu nombre este reconocimiento?
+        </mat-slide-toggle>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <button mat-raised-button class="bg-green my-4 w-50 auto">Enviar</button>
+        </div>
+      </form>
+
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
+<div class="p-4 d-flex flex-wrap justify-content-center">
+  <app-appreciation-card class="m-3" *ngFor="let appreciation of appreciations | async" [appreciation]="appreciation">
+  </app-appreciation-card>
+</div>
