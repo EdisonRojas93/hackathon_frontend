@@ -1,0 +1,7 @@
+<div style="display: inline-block" [attr.role]="editable ? 'button' : null" [ngClass]="{'selected': editable}"
+  *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i" (click)="onClick(i+1)">
+  <mat-icon class="text-green">
+    {{showIcon(i)}}
+  </mat-icon>
+
+</div>

@@ -1,0 +1,130 @@
+<div class="form-feedback py-4">
+  <mat-accordion class="w-50" color="primary">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Valora el trabajo de tus compañeros
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <form [formGroup]="feedbackForm" (ngSubmit)="sendFeedback()">
+
+        <mat-form-field class="w-100 my-1">
+          <input type="text" formControlName="user" placeholder="¿A quien quieres valorar?" aria-label="Number" matInput
+            [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+            (optionSelected)="selectValue($event.option.value)">
+            <mat-option *ngFor="let user of filteredOptions | async" [value]="user">
+              <span>{{user.first_name}} {{user.last_name}}</span> |
+              <small>{{user.area}} {{user.team}}</small>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="feedbackForm.get('user').hasError('required') && feedbackForm.get('user').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <div class="d-flex flex-row justify-content-between">
+          <label for="">Feedback</label>
+          <button mat-icon-button aria-label="Agregar feedback" (click)="addFeedback()">
+            <mat-icon class="text-green">playlist_add_check</mat-icon>
+          </button>
+        </div>
+
+
+        <div formArrayName="scores">
+          <div class="position-relative d-flex flex-row justify-content-between align-items-center my-2 p-3 pt-4" 
+            *ngFor="let feedback of feedbackArr.controls; let i = index" [formGroupName]="i">
+            <mat-form-field class="w-50 text-white">
+              <mat-label>¿Qué feedback quieres hacer? </mat-label>
+              <mat-select formControlName="score_id">
+                <mat-option *ngFor="let score of scores" [value]="score.uuid">
+                  {{score.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <app-star-rating formControlName="score" [editable]="true"></app-star-rating>
+
+            <button mat-icon-button aria-label="Agregar feedback" (click)="deleteFeedback(i)" style="position:absolute; right: 2px; top: 0px;">
+              <mat-icon class="text-dark" style="opacity:0.6">close</mat-icon>
+            </button>
+          </div>
+        </div>
+        <hr>
+  
+        <mat-form-field class="example-full-width w-100">
+          <textarea matInput placeholder="Deja un comentario" formControlName="comment"></textarea>
+          <mat-error *ngIf="feedbackForm.get('comment').hasError('required') && feedbackForm.get('comment').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <mat-slide-toggle class="w-100" formControlName="anonimus">¿Quieres firmar con tu nombre este reconocimiento?
+        </mat-slide-toggle>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <button mat-raised-button class="bg-green my-4 w-50 auto">Enviar Feedback</button>
+        </div>
+      </form>
+
+      <!-- <form [formGroup]="appreciationForm" (ngSubmit)="sendAppresiation()"> -->
+      <!-- <mat-form-field class="w-100 my-1">
+          <input type="text" formControlName="name" placeholder="¿A quien quieres reconocer?" aria-label="Number"
+            matInput [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let user of filteredOptions | async" [value]="user">
+              <span>{{user.first_name}} {{user.last_name}}</span> |
+              <small>{{user.area}} {{user.team}}</small>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="appreciationForm.get('name').hasError('required') && appreciationForm.get('name').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 my-1">
+          <mat-chip-list #chipList aria-label="reconocimiento" formControlName="skills">
+            <mat-chip *ngFor="let fruit of skils" selected class="bg-green" [removable]="removable"
+              (removed)="remove(fruit)">
+              {{fruit.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="¿Que quieres reconocer?" [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+
+          </mat-chip-list>
+          <mat-error
+            *ngIf="appreciationForm.get('skills').hasError('required') && appreciationForm.get('skills').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <label for="">Selecciona una imagen que represente reconocimiento</label>
+        <div class="my-4" role="button">
+          <img class="m-2" [ngClass]="{'selected': imgSelect === img}" *ngFor="let img of routeImg "
+            [src]="'assets/appreciation/'+img" width="120" (click)="setImg(img)">
+        </div>
+
+        <mat-form-field class="example-full-width w-100">
+          <textarea matInput placeholder="Deja un comentario" formControlName="comment"></textarea>
+          <mat-error
+            *ngIf="appreciationForm.get('comment').hasError('required') && appreciationForm.get('comment').touched">
+            Debes ingresar un valor
+          </mat-error>
+        </mat-form-field>
+
+        <mat-slide-toggle class="w-100" formControlName="anonimus">¿Quieres firmar con tu nombre este reconocimiento?
+        </mat-slide-toggle>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <button mat-raised-button class="bg-green my-4 w-50 auto">Enviar</button>
+        </div> -->
+      <!-- </form> -->
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+<div class="p-4 d-flex flex-wrap ">
+  <app-feedback-card></app-feedback-card>
+</div>

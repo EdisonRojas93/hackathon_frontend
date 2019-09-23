@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IFeedback } from 'src/app/models/feedback';
 
 @Component({
   selector: 'app-feedback-card',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackCardComponent implements OnInit {
 
+  @Input() feedback: IFeedback;
   constructor() { }
 
   ngOnInit() {
   }
+
+
 
 }

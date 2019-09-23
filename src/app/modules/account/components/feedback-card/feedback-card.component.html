@@ -1,1 +1,25 @@
-<p>feedback-card works!</p>
+<mat-card class="card-feedback">
+  <mat-card-header>
+    <div mat-card-avatar [ngStyle]="{'background-image': 'url(assets/cara.png)', 'background-size': 'cover'}">
+
+    </div>
+    <mat-card-title>Edison Rojas</mat-card-title>
+    <mat-card-subtitle>Developer</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <hr>
+
+    <div class="d-flex flex-column">
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <p><strong>Innovacion</strong></p>
+        <app-star-rating [rating]="2" ></app-star-rating>
+      </div>
+     
+    </div>
+
+
+  </mat-card-content>
+
+</mat-card>

@@ -8,8 +8,12 @@ const routes: Routes = [
        loadChildren: () => import('../modules/account/account.module').then(m => m.AccountModule)
    },
    {
+        path: 'login',
+        loadChildren: () => import('../modules/auth/auth.module').then(m => m.AuthModule)
+   },
+   {
        path: '',
-       redirectTo: 'mi-espacio',
+       redirectTo: 'login',
        pathMatch: 'full'
    }
 ];

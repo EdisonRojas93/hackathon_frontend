@@ -32,6 +32,7 @@ import { AppreciationCardComponent } from './components/appreciation-card/apprec
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpRequest, HttpClientModule } from '@angular/common/http';
 import { FeedbackCardComponent } from './components/feedback-card/feedback-card.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { FeedbackCardComponent } from './components/feedback-card/feedback-card.
         FeedbackComponent,
         FeedbackCardComponent,
         AppreciationComponent,
-        AppreciationCardComponent
+        AppreciationCardComponent,
+        StarRatingComponent
     ],
     imports: [
         CommonModule,

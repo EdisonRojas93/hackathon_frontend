@@ -41,8 +41,6 @@ export class AppreciationComponent implements OnInit, OnDestroy {
   filteredOptions: any =[];
   appreciations: any;
 
-  @ViewChild('addAppreciation',{static: true}) addAppreciation: ElementRef;
-
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -144,9 +142,7 @@ export class AppreciationComponent implements OnInit, OnDestroy {
       tags: this.appreciationForm.get('skills').value.split(','),
     }
     this.apprecetionService.saveAppreciation(appreciation).subscribe(res => {
-     console.log(
-       this.addAppreciation.nativeElement
-     );
+     console.log();
     });
    
 

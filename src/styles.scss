@@ -12,10 +12,29 @@ body{
     color: #1C242C !important;
 }
 
-.sticky {
-    position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  padding: 50px;
-  font-size: 20px;
-  }
+.text-green{
+    color: #00D964 !important; 
+}
+
+/** Overrides underline color **/
+.my-form-field.mat-form-field-appearance-legacy .mat-form-field-underline,
+.my-form-field.mat-form-field-appearance-legacy .mat-form-field-ripple,
+.my-form-field.mat-form-field-appearance-legacy.mat-focused
+	.mat-form-field-underline,
+.my-form-field.mat-form-field-appearance-legacy.mat-focused
+	.mat-form-field-ripple {
+	background-color: rgba($color: #fafafa, $alpha: .8);
+}
+
+/** Overrides label color **/
+.my-form-field.mat-form-field-appearance-legacy .mat-form-field-label,
+.my-form-field.mat-form-field-appearance-legacy.mat-focused
+	.mat-form-field-label {
+	color: white;
+}
+
+/** Overrides caret & text color **/
+.my-form-field.mat-form-field-appearance-legacy .mat-input-element {
+	caret-color: white;
+  color: white;
+}

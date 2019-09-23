@@ -21,7 +21,7 @@ export class AppreciationService {
     return this.http.get(`${environment.url_api}/api/user`, this.httpOptions).pipe(
       map((res: any) => {
       
-      return res.data.reconocimientos.map(r => {
+      return res.data.reconocimientos && res.data.reconocimientos.map(r => {
 
         let reconocimiento: IAppreciation = {
           name: `${r.sent_by.first_name} ${r.sent_by.last_name}`,
@@ -34,7 +34,7 @@ export class AppreciationService {
 
         return reconocimiento;
 
-      })
+      }) || []
     }))
    
   }
