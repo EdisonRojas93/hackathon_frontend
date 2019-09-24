@@ -24,11 +24,11 @@ export class AppreciationService {
       return res.data.reconocimientos && res.data.reconocimientos.map(r => {
 
         let reconocimiento: IAppreciation = {
-          name: `${r.sent_by.first_name} ${r.sent_by.last_name}`,
-          position: r.sent_by.position,
+          name: `${r.sent_by.first_name || r.sent_by} ${r.sent_by.last_name || ''}`,
+          position: r.sent_by.position || '',
           commet: r.comentarios,
           tags: r.skills.split(','),
-          area: r.sent_by.area,
+          area: r.sent_by.area || '',
           img: r.image
         }
 

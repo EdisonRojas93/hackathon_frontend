@@ -18,23 +18,24 @@ export class FeedbackService {
   constructor(private http: HttpClient) { }
 
   getFeedbacks() {
-    // return this.http.get(`${environment.url_api}/api/user`, this.httpOptions).pipe(
-    //   map((res: any) => {
+    return this.http.get(`${environment.url_api}/api/user`, this.httpOptions).pipe(
+      map((res: any) => {
       
-    //   return res.data.feedbacks && res.data.feedbacks.map(r => {
+      return res.data.feedbacks && res.data.feedbacks.map(r => {
 
-    //     let reconocimiento: IFeedback = {
-    //       name: `${r.sent_by.first_name} ${r.sent_by.last_name}`,
-    //       position: r.sent_by.position,
-    //       comments: r.comentarios,
-    //       area: r.sent_by.area || '',
+        let feedback: IFeedback = {
+          name: `${r.sent_by.first_name || r.sent_by} ${r.sent_by.last_name || ''}`,
+          position: r.sent_by.position || '',
+          comments: r.comentarios,
+          area: r.sent_by.area || '',
+          score: r.scores
           
-    //     }
+        }
 
-    //     return reconocimiento;
+        return feedback;
 
-    //   }) || []
-    // }))
+      }) || []
+    }))
    
   }
 

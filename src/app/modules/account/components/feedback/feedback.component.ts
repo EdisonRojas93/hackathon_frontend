@@ -15,6 +15,7 @@ export class FeedbackComponent implements OnInit {
   filteredOptions: any = [];
   scores: any = [];
   feedbackForm: FormGroup;
+  feedbacks: any;
 
   constructor(
     private userService: UserService,
@@ -33,6 +34,7 @@ export class FeedbackComponent implements OnInit {
     });
 
     this.userService.getUsers().subscribe(res => this.users = res);
+    this.feedbacks = this.feedbackService.getFeedbacks();
 
     this.filteredOptions = this.feedbackForm.get('user').valueChanges
       .pipe(

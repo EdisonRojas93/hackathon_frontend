@@ -1,6 +1,9 @@
 .card-feedback{
-    width: 100%;
+    width: 100% !important;
+    flex-grow: 1;
+    flex-basis: auto;
     @media (min-width:768px) {
-        max-width: 400px;
+        max-width: 400px !important;
+        min-width: 400px !important;
     }
  }
